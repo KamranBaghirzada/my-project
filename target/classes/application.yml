@@ -8,12 +8,16 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
     generate-ddl: true
+    properties:
+      hibernate:
+        id:
+          uuid_generator: org.hibernate.id.UUIDGenerator
 #  security:
 #    user:
 #     password: password
@@ -24,3 +28,13 @@ spring:
 
   application:
     name: accountantProject
+
+    spring:
+      jpa:
+        properties:
+          hibernate:
+            id:
+              uuid_generator=org:
+                hibernate:
+                  id:
+                    UUIDGenerator:

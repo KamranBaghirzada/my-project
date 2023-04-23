@@ -12,8 +12,10 @@ public class AccountResponseConverter implements Converter<Account, AccountRespo
     @Override
     public AccountResponse convert(Account account) {
         return AccountResponse.builder()
+                .id(account.getId())
                 .name(account.getFirstName())
                 .surname(account.getLastName())
+                .created(account.getCreatedAt())
                 .build();
     }
 }
