@@ -12,7 +12,7 @@ import java.util.UUID;
 @Builder
 public class AccountResponse {
 
-    private UUID id;
+    private Long id;
 
     private String name;
 

@@ -28,13 +28,3 @@ spring:
 
   application:
     name: accountantProject
-
-    spring:
-      jpa:
-        properties:
-          hibernate:
-            id:
-              uuid_generator=org:
-                hibernate:
-                  id:
-                    UUIDGenerator:

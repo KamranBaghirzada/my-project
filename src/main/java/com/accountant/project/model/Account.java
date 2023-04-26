@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Table(name = "accounts")
@@ -17,8 +16,8 @@ import java.util.UUID;
 public class Account extends BaseEntity {
 
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;
