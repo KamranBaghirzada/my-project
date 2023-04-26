@@ -14,7 +14,7 @@ public class ChatController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @CrossOrigin(origins = "*")
+
     @MessageMapping("/chat")
     //@SendTo("/topic")
     //@SendToUser()
