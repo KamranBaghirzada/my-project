@@ -47,8 +47,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountResponse addNewAccount(Account account) {
-        return accountResponseConverter.convert(accountRepository.save(account));
+    public AccountResponse addNewAccount(AccountRequest request) {
+//        return accountResponseConverter.convert(accountRepository.save(request));
+        return null;
     }
 
     @Override

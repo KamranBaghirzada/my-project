@@ -16,7 +16,7 @@ public interface AccountService {
 
     AccountResponse getOneAccountInDetail(Long accountId);
 
-    AccountResponse addNewAccount(Account account);
+    AccountResponse addNewAccount(AccountRequest request);
 
     AccountResponse changeAccount(Long accountId,Account account);
 }

@@ -1,6 +1,7 @@
 package com.accountant.project.model;
 
 
+import com.accountant.project.model.type.AccountType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -47,4 +48,9 @@ public class Account {
     public void initData() {
         this.fullName = this.lastName + " " + this.firstName + " " + this.patronymic;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "account_type")
+    private AccountType accountType;
 }

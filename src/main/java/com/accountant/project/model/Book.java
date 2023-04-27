@@ -3,6 +3,7 @@ package com.accountant.project.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -29,4 +30,7 @@ public class Book {
 
     @Column(name = "publish_date")
     private LocalDate publishDate;
+
+    @Column(name = "price")
+    private BigDecimal price;
 }

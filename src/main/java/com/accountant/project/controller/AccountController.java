@@ -1,6 +1,7 @@
 package com.accountant.project.controller;
 
 
+import com.accountant.project.dto.request.AccountRequest;
 import com.accountant.project.dto.response.AccountResponse;
 import com.accountant.project.model.Account;
 import com.accountant.project.service.AccountService;
@@ -17,22 +18,22 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<AccountResponse>> getAllAccounts() {
         return ResponseEntity.ok(accountService.getAllAccounts());
     }
 
-    @GetMapping("/{accountId}")
+    @GetMapping
     public ResponseEntity<AccountResponse> getOneAccountInDetail(@PathVariable Long accountId) {
         return ResponseEntity.ok(accountService.getOneAccountInDetail(accountId));
     }
 
-    @PostMapping("/add-account")
-    public ResponseEntity<AccountResponse> addAccount(@RequestBody Account account) {
-        return ResponseEntity.ok(accountService.addNewAccount(account));
+    @PostMapping
+    public ResponseEntity<AccountResponse> addAccount(@RequestBody AccountRequest request) {
+        return ResponseEntity.ok(accountService.addNewAccount(request));
     }
 
-    @PutMapping("/change-account/{accountId}")
+    @PutMapping
     public ResponseEntity<AccountResponse> changeAccount(@PathVariable Long accountId,
                                                          @RequestBody Account account) {
         return ResponseEntity.ok(accountService.changeAccount(accountId, account));

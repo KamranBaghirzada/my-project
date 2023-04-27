@@ -9,6 +9,8 @@ import lombok.Data;
 public class AccountRequest {
 
     private String name;
-
     private String surname;
+    private String patronymic;
+    private String email;
+    private String accountType;
 }
