@@ -1,6 +1,5 @@
 package com.accountant.project.dto.request;
 
-
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,8 +7,7 @@ import lombok.Data;
 @Builder
 public class AccountCreateRequest {
 
-    private String firstName;
-    private String lastName;
-    private String patronymic;
-    private String email;
+    private String name;
+    private String description;
+    private Integer accountType;
 }

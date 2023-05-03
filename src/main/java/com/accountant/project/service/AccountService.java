@@ -4,11 +4,11 @@ import com.accountant.project.dto.request.AccountCreateRequest;
 import com.accountant.project.dto.request.AccountUpdateRequest;
 import com.accountant.project.dto.request.BalanceRequest;
 import com.accountant.project.dto.response.AccountResponse;
+import com.accountant.project.dto.response.BalanceSheetResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface AccountService {
 
@@ -16,11 +16,13 @@ public interface AccountService {
 
     List<AccountResponse> getAllAccounts();
 
-    AccountResponse getOneAccountInDetail(UUID id);
+    AccountResponse getOneAccountInDetail(Long id);
 
     AccountResponse addNewAccount(AccountCreateRequest request);
 
-    AccountResponse changeAccount(UUID id, AccountUpdateRequest request);
+    AccountResponse changeAccount(Long id, AccountUpdateRequest request);
 
     String changeBalance(BalanceRequest request);
+
+    BalanceSheetResponse getBalanceSheet();
 }

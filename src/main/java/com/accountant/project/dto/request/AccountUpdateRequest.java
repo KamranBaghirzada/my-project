@@ -1,18 +1,16 @@
 package com.accountant.project.dto.request;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.deser.std.UUIDDeserializer;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.UUID;
+import java.math.BigDecimal;
 
 @Data
 @Builder
 public class AccountUpdateRequest {
 
-    private String firstName;
-    private String lastName;
-    private String patronymic;
-    private String email;
+    private String name;
+    private String description;
+    private BigDecimal balance;
+    private Integer accountType;
 }

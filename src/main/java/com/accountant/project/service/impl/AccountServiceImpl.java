@@ -4,8 +4,10 @@ import com.accountant.project.dto.request.AccountCreateRequest;
 import com.accountant.project.dto.request.AccountUpdateRequest;
 import com.accountant.project.dto.request.BalanceRequest;
 import com.accountant.project.dto.response.AccountResponse;
+import com.accountant.project.dto.response.BalanceSheetResponse;
 import com.accountant.project.mapper.AccountConverter;
 import com.accountant.project.mapper.AccountResponseConverter;
+import com.accountant.project.mapper.BalanceSheetResponseCreator;
 import com.accountant.project.model.Account;
 import com.accountant.project.repository.AccountRepository;
 import com.accountant.project.service.AccountService;
@@ -18,7 +20,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -27,10 +28,9 @@ import java.util.stream.Collectors;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
-
     private final AccountResponseConverter accountResponseConverter;
-
     private final AccountConverter accountConverter;
+    private final BalanceSheetResponseCreator balanceSheetResponseCreator;
 
     @Override
     public Page<AccountResponse> getAllAccountsWithSearch(Pageable pageable, AccountCreateRequest request) {
@@ -46,7 +46,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountResponse getOneAccountInDetail(UUID id) {
+    public AccountResponse getOneAccountInDetail(Long id) {
         Account account = accountRepository
                 .findById(id).orElseThrow(() ->
                         new RuntimeException("Account with number " + id + "does not exist."));
@@ -60,14 +60,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountResponse changeAccount(UUID id, AccountUpdateRequest request) {
-        Optional<Account> updatedAccount = accountRepository.findById(id);
+    public AccountResponse changeAccount(Long id, AccountUpdateRequest request) {
+        Optional<Account> updatedAccount
+                = accountRepository.findById(id);
+
         if (updatedAccount.isPresent()) {
             Account update = updatedAccount.get();
-            update.setFirstName(request.getFirstName());
-            update.setLastName(request.getLastName());
-            update.setPatronymic(request.getPatronymic());
-            return accountResponseConverter.convert(accountRepository.save(update));
+            update.setAccountName(request.getName());
+            update.setDescription(request.getDescription());
+            update.setBalance(request.getBalance());
+
+            return accountResponseConverter
+                    .convert(accountRepository.save(update));
         }
         return null;
     }
@@ -75,6 +79,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public String changeBalance(BalanceRequest request) {
         return "Your account balance now consists of " + updateBalance(request) + " US $";
+    }
+
+    @Override
+    public BalanceSheetResponse getBalanceSheet() {
+        return balanceSheetResponseCreator.createBalanceSheet();
     }
 
     public BigDecimal updateBalance(BalanceRequest request) {

@@ -1,47 +1,44 @@
 package com.accountant.project.model;
 
-
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
-@Table(name = "accounts")
+@Table(name = "kg_accounts")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Account extends BaseEntity {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "account_name")
+    private String accountName;
 
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "patronymic")
-    private String patronymic;
-
-    @Column(name = "email")
-    private String email;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "balance")
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.ZERO;
 
-    @Column(name = "is_locked")
-    private Boolean isLocked;
+    @Column(name = "last_transaction_amount")
+    private BigDecimal lastTransactionAmount = BigDecimal.ZERO;
 
-    @Transient
-    private String fullName;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "account_type")
+    private AccountType accountType;
 
-    @PostLoad
-    public void initData() {
-        this.fullName = this.lastName + " " + this.firstName + " " + this.patronymic;
-    }
+    @OneToMany(mappedBy = "creditAccount")
+    private List<Transaction> creditTransaction;
+
+    @OneToMany(mappedBy = "debitAccount")
+    private List<Transaction> debitTransaction;
 }

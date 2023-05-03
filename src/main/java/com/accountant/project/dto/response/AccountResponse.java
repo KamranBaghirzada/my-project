@@ -5,22 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @Builder
 public class AccountResponse {
 
     private Long id;
-
     private String name;
-
-    private String surname;
-
-    private LocalDateTime created;
-
+    private String description;
     private BigDecimal balance;
-
-    private UUID code;
 }

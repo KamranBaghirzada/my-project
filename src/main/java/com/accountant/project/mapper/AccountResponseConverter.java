@@ -13,9 +13,9 @@ public class AccountResponseConverter implements Converter<Account, AccountRespo
     public AccountResponse convert(Account account) {
         return AccountResponse.builder()
                 .id(account.getId())
-                .name(account.getFirstName())
-                .surname(account.getLastName())
-                .created(account.getCreatedAt())
+                .name(account.getAccountName())
+                .description(account.getDescription())
+                .balance(account.getBalance())
                 .build();
     }
 }
